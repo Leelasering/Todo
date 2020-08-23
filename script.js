@@ -58,7 +58,7 @@ window.onload = function () {
 
             for (let i = 0; i < this.m; i++) {
                 for (let j = 0; j < this.n; j++) {
-                    this.one_mas = [...this.one_mas,this.mas_s[i][j]];
+                    this.one_mas = [...this.one_mas, this.mas_s[i][j]];
                 }
             }
             //.reverse();
@@ -72,12 +72,47 @@ window.onload = function () {
             }
 
             console.log(this.mas_s);
-            return(this.mas_s);
+            return (this.mas_s);
         }
 
+        chet_nechet_arr = () => {
+            console.log('//get chet_nechet matrix')
+            this.mas_ch = [...this.mas];
+            for (let i = 0; i < this.m; i++) {
+                this.mas_ch[i] = [...this.mas[i]];
+            }
+
+            this.one_mas = [];
+            this.two_mas = [];
+
+            for (let i = 0; i < this.m; i++) {
+                for (let j = 0; j < this.n; j++) {
+                    this.one_mas = [...this.one_mas, this.mas_s[i][j]];
+                }
+            }
+
+            for (let i = 0; i < this.one_mas.length; i++) {
+                if (this.one_mas[i] % 2 == 0) {
+                    this.two_mas.unshift(this.one_mas[i]);
+                } else {
+                    this.two_mas.push(this.one_mas[i]);
+                }
+            }
+
+            for (let i = 0; i < this.m; i++) {
+                for (let j = 0; j < this.n; j++) {
+                    this.mas_ch[i][j] = this.two_mas[0];
+                    this.two_mas.shift();
+                }
+            }
+
+            console.log(this.mas_ch);
+            return (this.mas_ch);
+        }
 
     };
     let arr = new Matrix;
     let mult = arr.mult_col_row(1, 2);
     let arr_s = arr.sort_arr();
+    let arr_ch = arr.chet_nechet_arr();
 }
